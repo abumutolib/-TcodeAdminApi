@@ -9,23 +9,23 @@ using Application.GroupLanguageTools.DTOs;
 
 namespace Application.GroupLanguageTools.Queries
 {
-    public class GetGLTQuery : IRequest<GroupLangToolVm>
+    public class GroupLangToolQuery : IRequest<GroupLangToolVm>
     {
 
     }
 
-    internal class GetGLTQueryHandler : IRequestHandler<GetGLTQuery, GroupLangToolVm>
+    internal class GroupLangToolQueryHandler : IRequestHandler<GroupLangToolQuery, GroupLangToolVm>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
 
-        public GetGLTQueryHandler(IMapper mapper, IApplicationDbContext context)
+        public GroupLangToolQueryHandler(IMapper mapper, IApplicationDbContext context)
         {
             _mapper = mapper;
             _context = context;
         }
 
-        public async Task<GroupLangToolVm> Handle(GetGLTQuery request, CancellationToken cancellationToken)
+        public async Task<GroupLangToolVm> Handle(GroupLangToolQuery request, CancellationToken cancellationToken)
         {
             var vm = new GroupLangToolVm();
 

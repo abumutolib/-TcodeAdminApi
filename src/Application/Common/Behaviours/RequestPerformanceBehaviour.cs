@@ -12,18 +12,13 @@ namespace Application.Common.Behaviours
         private readonly Stopwatch _timer;
         private readonly ILogger<TRequest> _logger;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IIdentityService _identityService;
 
-        public RequestPerformanceBehaviour(
-            ILogger<TRequest> logger, 
-            ICurrentUserService currentUserService,
-            IIdentityService identityService)
+        public RequestPerformanceBehaviour(ILogger<TRequest> logger, ICurrentUserService currentUserService)
         {
             _timer = new Stopwatch();
 
             _logger = logger;
             _currentUserService = currentUserService;
-            _identityService = identityService;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
@@ -40,7 +35,7 @@ namespace Application.Common.Behaviours
             {
                 var requestName = typeof(TRequest).Name;
                 var userId = _currentUserService.UserId;
-                var userName = await _identityService.GetUserNameAsync(userId);
+                var userName = _currentUserService.Username;
 
                 _logger.LogWarning("TcodingTj Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
                     requestName, elapsedMilliseconds, userId, userName, request);

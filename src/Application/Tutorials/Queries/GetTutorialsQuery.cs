@@ -29,11 +29,9 @@ namespace Application.Tutorials.Queries
         {
             var vm = new TutorialVm();
 
-            //TODO: Update EF core 3 to EF Core 5 after releced
-
             vm.List = await _context.Tutorials
                             .Include(x => x.LanguageTool)
-                            .Include(x => x.TutorialImages)
+                            .Include(x => x.TutorialImages.Where(x => x.IsPrimary))
                             .ProjectTo<TutorialDto>(_mapper.ConfigurationProvider)
                             .ToListAsync(cancellationToken);
             return vm;

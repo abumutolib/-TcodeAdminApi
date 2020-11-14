@@ -10,28 +10,29 @@ namespace Application.Common.Behaviours
     {
         private readonly ILogger _logger;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IIdentityService _identityService;
 
-        public RequestLogger(ILogger<TRequest> logger, ICurrentUserService currentUserService, IIdentityService identityService)
+        public RequestLogger(ILogger<TRequest> logger, ICurrentUserService currentUserService)
         {
             _logger = logger;
             _currentUserService = currentUserService;
-            _identityService = identityService;
         }
 
         public async Task Process(TRequest request, CancellationToken cancellationToken)
         {
-            var requestName = typeof(TRequest).Name;
-            var userId = _currentUserService.UserId ?? string.Empty;
-            string userName = string.Empty;
-
-            if (!string.IsNullOrEmpty(userId))
+            await Task.Run(() =>
             {
-                userName = await _identityService.GetUserNameAsync(userId);
-            }
+                var requestName = typeof(TRequest).Name;
+                var userId = _currentUserService.UserId ?? string.Empty;
+                string userName = string.Empty;
 
-            _logger.LogInformation("TcodingTj Request: {Name} {@UserId} {@UserName} {@Request}",
-                requestName, userId, userName, request);
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    userName = _currentUserService.Username;
+                }
+
+                _logger.LogInformation("TcodingTj Request: {Name} {@UserId} {@UserName} {@Request}",
+                    requestName, userId, userName, request);
+            }, cancellationToken);
         }
     }
 }
