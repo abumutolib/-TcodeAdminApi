@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using AutoMapper;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +29,6 @@ namespace Application.LanguageTools.Queries
             return new LanguageToolVm
             {
                 List = await _context.LanguageTools
-                            .Where(x => x.Tutorials.Any())
                             .ProjectTo<LanguageToolDto>(_mapper.ConfigurationProvider)
                             .ToListAsync(cancellationToken)
             };
