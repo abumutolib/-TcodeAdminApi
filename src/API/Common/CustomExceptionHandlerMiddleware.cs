@@ -36,6 +36,14 @@ namespace API.Common
 
             var result = string.Empty;
 
+            //(result, code) = exception switch
+            //{
+            //    ValidationException => ("", HttpStatusCode.BadRequest),
+            //    NotFoundException => ("", HttpStatusCode.NotFound),
+            //    UnauthorizedException => ("", HttpStatusCode.Unauthorized),
+            //    _ => ("", HttpStatusCode.InternalServerError)
+            //};
+
             switch (exception)
             {
                 case ValidationException:

@@ -11,8 +11,7 @@ namespace API.OAuth
     {
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var config = new JwtConfig();
-            config = configuration.GetSection("JwtConfig").Get<JwtConfig>();
+            var config = configuration.GetSection("JwtConfig").Get<JwtConfig>();
 
             services.AddAuthentication(options =>
             {
