@@ -18,9 +18,9 @@ namespace Application.GroupTutorials.Queries
     internal class DetailsGroupTutorialQueryHandler : IRequestHandler<DetailsGroupTutorialQuery, GroupTutorialDto>
     {
         private readonly IMapper _mapper;
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DetailsGroupTutorialQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public DetailsGroupTutorialQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;

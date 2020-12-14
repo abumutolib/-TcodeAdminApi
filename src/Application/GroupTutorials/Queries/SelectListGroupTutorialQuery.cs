@@ -14,9 +14,9 @@ namespace Application.GroupTutorials.Queries
 
     internal class SelectListGroupTutorialQueryHandler : IRequestHandler<SelectListGroupTutorialQuery, SelectListVm>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public SelectListGroupTutorialQueryHandler(IApplicationDbContext context)
+        public SelectListGroupTutorialQueryHandler(IAppDbContext context)
         {
             _context = context;
         }

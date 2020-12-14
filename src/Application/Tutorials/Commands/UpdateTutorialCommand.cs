@@ -17,9 +17,9 @@ namespace Application.Tutorials.Commands
 
     public class UpdateTutorialCommandHandler : IRequestHandler<UpdateTutorialCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateTutorialCommandHandler(IApplicationDbContext context)
+        public UpdateTutorialCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

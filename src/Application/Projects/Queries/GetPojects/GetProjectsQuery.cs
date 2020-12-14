@@ -13,10 +13,10 @@ namespace Application.Projects.Queries.GetPojects
     }
     public class GetProjectsQueryHandler : IRequestHandler<GetProjectsQuery, ProjectVm>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetProjectsQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetProjectsQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

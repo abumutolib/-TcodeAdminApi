@@ -13,10 +13,10 @@ namespace Infrastructure.Identity
 {
     public class IdentityService : IIdentityService
     {
-        private readonly IApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IAppDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public IdentityService(IApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public IdentityService(IAppDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -39,7 +39,7 @@ namespace Infrastructure.Identity
 
         public async Task<(string id, string username, IList<string> roles)> RefreshToken(string token)
         {
-            var refreshToken = _context.RefreshTokens.Where(x => x.Token == token).FirstOrDefault();//.FirstOrDefaultAsync();
+            var refreshToken = _context.AppUserRefreshTokens.Where(x => x.Token == token).FirstOrDefault();//.FirstOrDefaultAsync();
             if (refreshToken == null)
                 throw new NotFoundException("RefreshToken not found", token);
 
@@ -59,10 +59,10 @@ namespace Infrastructure.Identity
             if (user == null)
                 throw new NotFoundException("User not found", username);
 
-            var refreshToken = await _context.RefreshTokens.FindAsync(user.Id);
+            var refreshToken = await _context.AppUserRefreshTokens.FindAsync(user.Id);
             if (refreshToken == null)
             {
-                refreshToken = new AspNetUserRefreshToken
+                refreshToken = new AppUserRefreshToken
                 {
                     Id = user.Id,
                     Token = token,
@@ -70,14 +70,14 @@ namespace Infrastructure.Identity
                     Expires = DateTime.UtcNow.AddDays(30),
                 };
 
-                _context.RefreshTokens.Add(refreshToken);
+                _context.AppUserRefreshTokens.Add(refreshToken);
             }
             else
             {
                 refreshToken.Token = token;
                 refreshToken.Created = DateTime.UtcNow;
                 refreshToken.Expires = DateTime.UtcNow.AddDays(30);
-                _context.RefreshTokens.Update(refreshToken);
+                _context.AppUserRefreshTokens.Update(refreshToken);
             }
 
             await _context.SaveChangesAsync(new CancellationToken());

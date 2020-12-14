@@ -16,10 +16,10 @@ namespace Application.Tutorials.Queries
 
     public class GetTutorialsQueryHandler : IRequestHandler<GetTutorialsQuery, TutorialVm>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetTutorialsQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetTutorialsQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

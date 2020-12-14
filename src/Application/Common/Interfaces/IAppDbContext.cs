@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Common.Interfaces
 {
-    public interface IApplicationDbContext
+    public interface IAppDbContext
     {
         DbSet<Tutorial> Tutorials { get; set; }
         DbSet<Technology> Technologies { get; set; }
@@ -18,9 +18,9 @@ namespace Application.Common.Interfaces
         DbSet<ArticleImage> ArticleImages { get; set; }
         DbSet<Project> Projects { get; set; }
 
-        DbSet<User> AppUsers { get; set; }
+        DbSet<AppDataUser> AppDataUsers { get; set; }
         DbSet<Gender> Genders { get; set; }
-        DbSet<AspNetUserRefreshToken> RefreshTokens { get; set; }
+        DbSet<AppUserRefreshToken> AppUserRefreshTokens { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

@@ -17,9 +17,9 @@ namespace Application.Technologies.Commands
 
     internal class UpdateTechnologyCommandHandler : IRequestHandler<UpdateTechnologyCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateTechnologyCommandHandler(IApplicationDbContext context)
+        public UpdateTechnologyCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

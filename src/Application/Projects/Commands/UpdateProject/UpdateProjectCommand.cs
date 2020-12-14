@@ -15,9 +15,9 @@ namespace Application.Projects.Commands.UpdateProject
 
     public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateProjectCommandHandler(IApplicationDbContext context)
+        public UpdateProjectCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

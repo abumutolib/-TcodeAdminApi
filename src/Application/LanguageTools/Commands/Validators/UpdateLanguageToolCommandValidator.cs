@@ -8,9 +8,9 @@ namespace Application.LanguageTools.Commands.Validators
 {
     public class UpdateLanguageToolCommandValidator : AbstractValidator<UpdateLanguageToolCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateLanguageToolCommandValidator(IApplicationDbContext context)
+        public UpdateLanguageToolCommandValidator(IAppDbContext context)
         {
             _context = context;
 

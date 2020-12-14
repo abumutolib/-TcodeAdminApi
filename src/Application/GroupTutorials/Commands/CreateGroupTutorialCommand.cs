@@ -14,9 +14,9 @@ namespace Application.GroupTutorials.Commands
 
     internal class CreateGroupTutorialCommandHandler : IRequestHandler<CreateGroupTutorialCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateGroupTutorialCommandHandler(IApplicationDbContext context)
+        public CreateGroupTutorialCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

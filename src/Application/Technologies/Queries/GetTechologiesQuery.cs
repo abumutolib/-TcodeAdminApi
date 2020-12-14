@@ -17,9 +17,9 @@ namespace Application.Technologies.Queries
     internal class GetTechnologiesQueryHandler : IRequestHandler<GetTechologiesQuery, TechnologyVm>
     {
         private readonly IMapper _mapper;
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public GetTechnologiesQueryHandler(IMapper mapper, IApplicationDbContext context)
+        public GetTechnologiesQueryHandler(IMapper mapper, IAppDbContext context)
         {
             _mapper = mapper;
             _context = context;

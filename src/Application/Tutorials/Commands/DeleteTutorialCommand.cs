@@ -14,9 +14,9 @@ namespace Application.Tutorials.Commands
 
     public class DeleteTutorialCommandHandler : IRequestHandler<DeleteTutorialCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DeleteTutorialCommandHandler(IApplicationDbContext context)
+        public DeleteTutorialCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

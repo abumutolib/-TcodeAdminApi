@@ -8,9 +8,9 @@ namespace Application.GroupLanguageTools.Commands.Validators
 {
     public class CreateGLTCommandValidator : AbstractValidator<CreateGLTCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateGLTCommandValidator(IApplicationDbContext context)
+        public CreateGLTCommandValidator(IAppDbContext context)
         {
             _context = context;
             RuleFor(v => v.Title)

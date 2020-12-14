@@ -8,9 +8,9 @@ namespace Application.GroupTutorials.Commands.Validators
 {
     public class CreateGroupTutorialCommandValidator : AbstractValidator<CreateGroupTutorialCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateGroupTutorialCommandValidator(IApplicationDbContext context)
+        public CreateGroupTutorialCommandValidator(IAppDbContext context)
         {
             _context = context;
 

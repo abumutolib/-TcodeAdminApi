@@ -14,9 +14,9 @@ namespace Application.Technologies.Commands
 
     internal class DeleteTechnologyCommandHandler : IRequestHandler<DeleteTechnologyCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DeleteTechnologyCommandHandler(IApplicationDbContext context)
+        public DeleteTechnologyCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

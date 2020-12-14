@@ -8,9 +8,9 @@ namespace Application.GroupLanguageTools.Commands.Validators
 {
     public class UpdateGLTCommandValidator : AbstractValidator<UpdateGLTCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateGLTCommandValidator(IApplicationDbContext context)
+        public UpdateGLTCommandValidator(IAppDbContext context)
         {
             _context = context;
             RuleFor(v => v.Title)

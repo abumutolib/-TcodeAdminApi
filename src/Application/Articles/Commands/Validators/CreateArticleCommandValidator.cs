@@ -8,9 +8,9 @@ namespace Application.Articles.Commands.Validators
 {
     public class CreateArticleCommandValidator : AbstractValidator<CreateArticleCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateArticleCommandValidator(IApplicationDbContext context)
+        public CreateArticleCommandValidator(IAppDbContext context)
         {
             _context = context;
 

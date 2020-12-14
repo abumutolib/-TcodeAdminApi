@@ -17,9 +17,9 @@ namespace Application.GroupLanguageTools.Queries
     internal class GroupLangToolQueryHandler : IRequestHandler<GroupLangToolQuery, GroupLangToolVm>
     {
         private readonly IMapper _mapper;
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public GroupLangToolQueryHandler(IMapper mapper, IApplicationDbContext context)
+        public GroupLangToolQueryHandler(IMapper mapper, IAppDbContext context)
         {
             _mapper = mapper;
             _context = context;

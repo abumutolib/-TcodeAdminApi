@@ -16,10 +16,10 @@ namespace Application.Articles.Queries
 
     public class DetailsArticleQueryHandler : IRequestHandler<DetailsArticleQuery, ArticleDto>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
 
-        public DetailsArticleQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public DetailsArticleQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

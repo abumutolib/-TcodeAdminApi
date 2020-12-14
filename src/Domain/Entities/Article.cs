@@ -11,7 +11,7 @@ namespace Domain.Entities
         public string HtmlContent { get; set; }
         public bool IsActive { get; set; }
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual AppDataUser User { get; set; }
         public virtual ICollection<ArticleImage> Images { get; set; }
         public virtual ICollection<ArticleComment> Comments { get; set; }
     }

@@ -9,9 +9,9 @@ namespace Application.Projects.Commands.CreateProject
 {
     public class CreateProjectCommandValidator : AbstractValidator<Project>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateProjectCommandValidator(IApplicationDbContext context)
+        public CreateProjectCommandValidator(IAppDbContext context)
         {
             _context = context;
 

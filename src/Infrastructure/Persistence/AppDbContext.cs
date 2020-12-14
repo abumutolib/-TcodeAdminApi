@@ -8,15 +8,16 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Domain.Common;
 using Domain.Entities;
 using Application.Common.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Persistence
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
+    public class AppDbContext : ApiAuthorizationDbContext<AppUser>, IAppDbContext
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
 
-        public ApplicationDbContext(
+        public AppDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,
             ICurrentUserService currentUserService,
@@ -26,7 +27,7 @@ namespace Infrastructure.Persistence
             _dateTime = dateTime;
         }
 
-        public DbSet<User> AppUsers { get; set; }
+        public DbSet<AppDataUser> AppDataUsers { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Project> Projects { get; set; }
@@ -37,7 +38,7 @@ namespace Infrastructure.Persistence
         public DbSet<GroupTutorial> GroupTutorials { get; set; }
         public DbSet<TutorialImage> TutorialImages { get; set; }
         public DbSet<GroupLanguageTool> GroupLanguageTools { get; set; }
-        public DbSet<AspNetUserRefreshToken> RefreshTokens { get; set; }
+        public DbSet<AppUserRefreshToken> AppUserRefreshTokens { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -61,9 +62,17 @@ namespace Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            base.OnModelCreating(builder);
+            //TODO : Rename AspNet Identity Tables
+            //builder.Entity<AppUser>(entity => { entity.ToTable("AppUsers"); });
+            //builder.Entity<AppRole>(entity => { entity.ToTable("AppRoles"); });
+            //builder.Entity<AppUserRole>(entity => { entity.ToTable("AppUserRoles"); });
+            //builder.Entity<AppUserClaim>(entity => { entity.ToTable("AppUserClaims"); });
+            //builder.Entity<AppRoleClaim>(entity => { entity.ToTable("AppRoleClaims"); });
+            //builder.Entity<AppUserLogin>(entity => { entity.ToTable("AppUserLogins"); });
+            //builder.Entity<AppUserToken>(entity => { entity.ToTable("AppUserTokens"); });
         }
     }
 }

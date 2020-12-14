@@ -4,9 +4,9 @@ using Domain.Entities;
 
 namespace Infrastructure.Persistence.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<AppDataUser>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<AppDataUser> builder)
         {
             builder.Property(n => n.FirstName)
                 .IsRequired()

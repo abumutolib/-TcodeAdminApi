@@ -16,9 +16,9 @@ namespace Application.GroupTutorials.Commands
 
     internal class UpdateGroupTutorialCommandHandler : IRequestHandler<UpdateGroupTutorialCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateGroupTutorialCommandHandler(IApplicationDbContext context)
+        public UpdateGroupTutorialCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

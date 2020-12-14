@@ -4,16 +4,14 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201126163106_InitMigration")]
-    partial class InitMigration
+    [DbContext(typeof(AppDbContext))]
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +19,46 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("Domain.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Domain.Entities.AppDataUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("GenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique()
+                        .HasFilter("[ApplicationUserId] IS NOT NULL");
+
+                    b.HasIndex("GenderId");
+
+                    b.ToTable("AppDataUsers");
+                });
+
+            modelBuilder.Entity("Domain.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -84,6 +121,25 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Domain.Entities.AppUserRefreshToken", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUserRefreshTokens");
                 });
 
             modelBuilder.Entity("Domain.Entities.Article", b =>
@@ -182,25 +238,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ArticleId");
 
                     b.ToTable("ArticleImages");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AspNetUserRefreshToken", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Expires")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
@@ -518,45 +555,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("TutorialImages");
                 });
 
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("GenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("MiddleName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique()
-                        .HasFilter("[ApplicationUserId] IS NOT NULL");
-
-                    b.HasIndex("GenderId");
-
-                    b.ToTable("AppUsers");
-                });
-
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
@@ -795,9 +793,37 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.Entities.AppDataUser", b =>
+                {
+                    b.HasOne("Domain.Entities.AppUser", "ApplicationUser")
+                        .WithOne("User")
+                        .HasForeignKey("Domain.Entities.AppDataUser", "ApplicationUserId");
+
+                    b.HasOne("Domain.Entities.Gender", "Gender")
+                        .WithMany("ClientUsers")
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Gender");
+                });
+
+            modelBuilder.Entity("Domain.Entities.AppUserRefreshToken", b =>
+                {
+                    b.HasOne("Domain.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Domain.Entities.Article", b =>
                 {
-                    b.HasOne("Domain.Entities.User", "User")
+                    b.HasOne("Domain.Entities.AppDataUser", "User")
                         .WithMany("Articles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -836,17 +862,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("Domain.Entities.AspNetUserRefreshToken", b =>
-                {
-                    b.HasOne("Domain.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-                });
-
             modelBuilder.Entity("Domain.Entities.LanguageTool", b =>
                 {
                     b.HasOne("Domain.Entities.GroupLanguageTool", "Group")
@@ -868,7 +883,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Project", b =>
                 {
-                    b.HasOne("Domain.Entities.User", "User")
+                    b.HasOne("Domain.Entities.AppDataUser", "User")
                         .WithMany("Projects")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -907,23 +922,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Tutorial");
                 });
 
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.HasOne("Domain.Entities.ApplicationUser", "ApplicationUser")
-                        .WithOne("User")
-                        .HasForeignKey("Domain.Entities.User", "ApplicationUserId");
-
-                    b.HasOne("Domain.Entities.Gender", "Gender")
-                        .WithMany("ClientUsers")
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Gender");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -935,7 +933,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.ApplicationUser", null)
+                    b.HasOne("Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -944,7 +942,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.ApplicationUser", null)
+                    b.HasOne("Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -959,7 +957,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.ApplicationUser", null)
+                    b.HasOne("Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -968,14 +966,21 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Domain.Entities.ApplicationUser", null)
+                    b.HasOne("Domain.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Domain.Entities.AppDataUser", b =>
+                {
+                    b.Navigation("Articles");
+
+                    b.Navigation("Projects");
+                });
+
+            modelBuilder.Entity("Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("User");
                 });
@@ -1020,13 +1025,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Tutorial", b =>
                 {
                     b.Navigation("TutorialImages");
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Navigation("Articles");
-
-                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

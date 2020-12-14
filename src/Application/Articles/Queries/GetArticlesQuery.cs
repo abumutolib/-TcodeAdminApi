@@ -21,9 +21,9 @@ namespace Application.Articles.Queries
     internal class GetArticlesQueryHandler : IRequestHandler<GetArticlesQuery, PagedResult<ArticleListDto>>
     {
         private readonly IMapper _mapper;
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public GetArticlesQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetArticlesQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;

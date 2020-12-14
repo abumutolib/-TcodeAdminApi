@@ -17,9 +17,9 @@ namespace Application.LanguageTools.Queries
     internal class DetailsLangToolQueryHandler : IRequestHandler<DetailsLangToolQuery, LanguageToolDto>
     {
         private readonly IMapper _mapper;
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DetailsLangToolQueryHandler(IMapper mapper, IApplicationDbContext context)
+        public DetailsLangToolQueryHandler(IMapper mapper, IAppDbContext context)
         {
             _mapper = mapper;
             _context = context;

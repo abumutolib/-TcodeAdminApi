@@ -14,9 +14,9 @@ namespace Application.LanguageTools.Queries
 
     internal class SelectListLangToolsQueryHandler : IRequestHandler<SelectListLangToolsQuery, SelectListVm>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public SelectListLangToolsQueryHandler(IApplicationDbContext context)
+        public SelectListLangToolsQueryHandler(IAppDbContext context)
         {
             _context = context;
         }

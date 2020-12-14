@@ -14,9 +14,9 @@ namespace Application.Projects.Commands.DeleteProject
 
     public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DeleteProjectCommandHandler(IApplicationDbContext context)
+        public DeleteProjectCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

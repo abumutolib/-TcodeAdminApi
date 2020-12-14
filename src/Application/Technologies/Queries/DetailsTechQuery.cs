@@ -17,9 +17,9 @@ namespace Application.Technologies.Queries
     internal class DetailsTechQueryHandler : IRequestHandler<DetailsTechQuery, TechnologyDto>
     {
         private readonly IMapper _mapper;
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DetailsTechQueryHandler(IMapper mapper, IApplicationDbContext context)
+        public DetailsTechQueryHandler(IMapper mapper, IAppDbContext context)
         {
             _mapper = mapper;
             _context = context;

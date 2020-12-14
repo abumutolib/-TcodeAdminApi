@@ -14,9 +14,9 @@ namespace Application.Articles.Commands
 
     public class DeleteArticleCommandHandler : IRequestHandler<DeleteArticleCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DeleteArticleCommandHandler(IApplicationDbContext context)
+        public DeleteArticleCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

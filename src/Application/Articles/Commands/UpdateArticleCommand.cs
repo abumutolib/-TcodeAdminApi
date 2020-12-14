@@ -17,9 +17,9 @@ namespace Application.Articles.Commands
 
     public class UpdateArticleCommandHandler : IRequestHandler<UpdateArticleCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateArticleCommandHandler(IApplicationDbContext context)
+        public UpdateArticleCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

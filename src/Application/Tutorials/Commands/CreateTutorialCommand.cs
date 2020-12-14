@@ -16,9 +16,9 @@ namespace Application.Tutorials.Commands
 
     public class CreateTutorialCommandHandler : IRequestHandler<CreateTutorialCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateTutorialCommandHandler(IApplicationDbContext context)
+        public CreateTutorialCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

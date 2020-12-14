@@ -14,9 +14,9 @@ namespace Application.GroupTutorials.Commands
 
     internal class DeleteGroupTutorialCommandHandler : IRequestHandler<DeleteGroupTutorialCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DeleteGroupTutorialCommandHandler(IApplicationDbContext context)
+        public DeleteGroupTutorialCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

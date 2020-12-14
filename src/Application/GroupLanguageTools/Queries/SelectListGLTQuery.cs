@@ -14,9 +14,9 @@ namespace Application.GroupLanguageTools.Queries
 
     internal class SelectListGLTQueryHandler : IRequestHandler<SelectListGLTQuery, SelectListVm>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public SelectListGLTQueryHandler(IApplicationDbContext context)
+        public SelectListGLTQueryHandler(IAppDbContext context)
         {
             _context = context;
         }

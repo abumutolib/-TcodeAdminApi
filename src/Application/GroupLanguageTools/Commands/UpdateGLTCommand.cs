@@ -16,9 +16,9 @@ namespace Application.GroupLanguageTools.Commands
 
     internal class UpdateGLTCommandHandler : IRequestHandler<UpdateGLTCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateGLTCommandHandler(IApplicationDbContext context)
+        public UpdateGLTCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

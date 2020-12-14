@@ -30,7 +30,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddHttpContextAccessor();
+            services.AddHttpContextAccessor();          
 
             services.AddScoped<TokenHelper>();
             services.AddScoped<IPathProvider, PathProvider>();
@@ -40,7 +40,7 @@ namespace API
             services.AddInfrastructure(Configuration, Environment);
 
             services.AddHealthChecks()
-                    .AddDbContextCheck<ApplicationDbContext>();
+                    .AddDbContextCheck<AppDbContext>();
 
             services.AddJwtAuthentication(Configuration);
 
@@ -71,6 +71,7 @@ namespace API
             app.UseRouting();
 
             app.UseAuthentication()
+               //.UseIdentityServer()
                .UseAuthorization();
 
             app.UseEndpoints(endpoints =>

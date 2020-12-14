@@ -14,9 +14,9 @@ namespace Application.LanguageTools.Commands
 
     public class DeleteLanguageToolCommandHandler : IRequestHandler<DeleteLanguageToolCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DeleteLanguageToolCommandHandler(IApplicationDbContext context)
+        public DeleteLanguageToolCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

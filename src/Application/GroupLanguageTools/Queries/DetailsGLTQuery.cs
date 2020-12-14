@@ -17,9 +17,9 @@ namespace Application.GroupLanguageTools.Queries
     internal class DetailsGLTQueryHandler : IRequestHandler<DetailsGLTQuery, GroupLangToolDto>
     {
         private readonly IMapper _mapper;
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DetailsGLTQueryHandler(IMapper mapper, IApplicationDbContext context)
+        public DetailsGLTQueryHandler(IMapper mapper, IAppDbContext context)
         {
             _mapper = mapper;
             _context = context;

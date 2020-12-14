@@ -16,9 +16,9 @@ namespace Application.Articles.Commands
     }
     public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateArticleCommandHandler(IApplicationDbContext context)
+        public CreateArticleCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

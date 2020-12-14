@@ -13,9 +13,9 @@ namespace Application.Projects.Commands.CreateProject
 
     public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateProjectCommandHandler(IApplicationDbContext context)
+        public CreateProjectCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

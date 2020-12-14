@@ -14,9 +14,9 @@ namespace Application.GroupLanguageTools.Commands
 
     internal class CreateGLTCommandHandler : IRequestHandler<CreateGLTCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateGLTCommandHandler(IApplicationDbContext context)
+        public CreateGLTCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

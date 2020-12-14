@@ -18,9 +18,9 @@ namespace Application.LanguageTools.Commands
 
     public class CreateLanguageToolCommandHandler : IRequestHandler<CreateLanguageToolCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateLanguageToolCommandHandler(IApplicationDbContext context)
+        public CreateLanguageToolCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

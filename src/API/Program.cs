@@ -1,13 +1,13 @@
-using Domain.Entities;
+using System;
+using System.Threading.Tasks;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+using Domain.Entities;
 
 namespace API
 {
@@ -36,16 +36,16 @@ namespace API
 
                 try
                 {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
+                    var context = services.GetRequiredService<AppDbContext>();
 
                     if (context.Database.IsSqlServer())
                     {
                         context.Database.Migrate();
                     }
 
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
 
-                    await ApplicationDbContextSeed.SeedAsync(context, userManager);
+                    await AppDbContextSeed.SeedAsync(context, userManager);
                 }
                 catch (Exception ex)
                 {

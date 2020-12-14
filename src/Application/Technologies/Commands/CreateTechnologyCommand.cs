@@ -15,9 +15,9 @@ namespace Application.Technologies.Commands
 
     internal class CreateTechnologyCommandHandler : IRequestHandler<CreateTechnologyCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public CreateTechnologyCommandHandler(IApplicationDbContext context)
+        public CreateTechnologyCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

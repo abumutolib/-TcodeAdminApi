@@ -195,6 +195,26 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppUserRefreshTokens",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Expires = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserRefreshTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppUserRefreshTokens_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -280,27 +300,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RefreshTokens",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Token = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Expires = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RefreshTokens", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RefreshTokens_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppUsers",
+                name: "AppDataUsers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -313,15 +313,15 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUsers", x => x.Id);
+                    table.PrimaryKey("PK_AppDataUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AppUsers_AspNetUsers_ApplicationUserId",
+                        name: "FK_AppDataUsers_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AppUsers_Genders_GenderId",
+                        name: "FK_AppDataUsers_Genders_GenderId",
                         column: x => x.GenderId,
                         principalTable: "Genders",
                         principalColumn: "Id",
@@ -382,9 +382,9 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Articles_AppUsers_UserId",
+                        name: "FK_Articles_AppDataUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AppUsers",
+                        principalTable: "AppDataUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -406,9 +406,9 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Projects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Projects_AppUsers_UserId",
+                        name: "FK_Projects_AppDataUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AppUsers",
+                        principalTable: "AppDataUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -517,15 +517,15 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppUsers_ApplicationUserId",
-                table: "AppUsers",
+                name: "IX_AppDataUsers_ApplicationUserId",
+                table: "AppDataUsers",
                 column: "ApplicationUserId",
                 unique: true,
                 filter: "[ApplicationUserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppUsers_GenderId",
-                table: "AppUsers",
+                name: "IX_AppDataUsers_GenderId",
+                table: "AppDataUsers",
                 column: "GenderId");
 
             migrationBuilder.CreateIndex(
@@ -647,6 +647,9 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AppUserRefreshTokens");
+
+            migrationBuilder.DropTable(
                 name: "ArticleComment");
 
             migrationBuilder.DropTable(
@@ -677,9 +680,6 @@ namespace Infrastructure.Migrations
                 name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "RefreshTokens");
-
-            migrationBuilder.DropTable(
                 name: "TutorialImages");
 
             migrationBuilder.DropTable(
@@ -695,7 +695,7 @@ namespace Infrastructure.Migrations
                 name: "Tutorials");
 
             migrationBuilder.DropTable(
-                name: "AppUsers");
+                name: "AppDataUsers");
 
             migrationBuilder.DropTable(
                 name: "GroupTutorials");

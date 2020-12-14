@@ -20,9 +20,9 @@ namespace Application.LanguageTools.Commands
 
     public class UpdateLanguageToolCommandHandler : IRequestHandler<UpdateLanguageToolCommand, int>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateLanguageToolCommandHandler(IApplicationDbContext context)
+        public UpdateLanguageToolCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

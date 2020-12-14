@@ -14,10 +14,10 @@ namespace Application.GroupTutorials.Queries
     }
     internal class GetGroupTutorialQueryHandler : IRequestHandler<GetGroupTutorialQuery, GroupTutorialVm>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetGroupTutorialQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetGroupTutorialQueryHandler(IAppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

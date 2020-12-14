@@ -21,27 +21,27 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
 
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
 
-            services.AddDefaultIdentity<ApplicationUser>(options =>
+            services.AddDefaultIdentity<AppUser>(options =>
             {
                 options.Password.RequiredLength = 8;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.User.RequireUniqueEmail = true;
-            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             // For Integration Tests
             if (environment.IsEnvironment("Test"))
             {
                 services.AddIdentityServer()
-                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
+                    .AddApiAuthorization<AppUser, AppDbContext>(options =>
                     {
                         options.Clients.Add(new Client
                         {
@@ -67,7 +67,7 @@ namespace Infrastructure
             else
             {
                 services.AddIdentityServer()
-                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                    .AddApiAuthorization<AppUser, AppDbContext>();
 
                 services.AddTransient<IDateTime, DateTimeService>();
                 services.AddTransient<IIdentityService, IdentityService>();

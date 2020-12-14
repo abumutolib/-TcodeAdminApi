@@ -14,9 +14,9 @@ namespace Application.GroupLanguageTools.Commands
 
     internal class DeleteGLTCommandHandler : IRequestHandler<DeleteGLTCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public DeleteGLTCommandHandler(IApplicationDbContext context)
+        public DeleteGLTCommandHandler(IAppDbContext context)
         {
             _context = context;
         }

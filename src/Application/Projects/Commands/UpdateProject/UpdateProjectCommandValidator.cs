@@ -6,9 +6,9 @@ namespace Application.Projects.Commands.UpdateProject
 {
     public class UpdateProjectCommandValidator : AbstractValidator<Project>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UpdateProjectCommandValidator(IApplicationDbContext context)
+        public UpdateProjectCommandValidator(IAppDbContext context)
         {
             _context = context;
 

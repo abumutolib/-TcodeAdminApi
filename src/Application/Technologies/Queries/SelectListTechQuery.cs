@@ -14,9 +14,9 @@ namespace Application.Technologies.Queries
 
     internal class SelectListTechQueryHandler : IRequestHandler<SelectListTechQuery, SelectListVm>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public SelectListTechQueryHandler(IApplicationDbContext context)
+        public SelectListTechQueryHandler(IAppDbContext context)
         {
             _context = context;
         }
