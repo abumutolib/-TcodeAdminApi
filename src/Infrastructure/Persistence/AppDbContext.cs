@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Domain.Common;
 using Domain.Entities;
 using Application.Common.Interfaces;
-using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Persistence
 {
@@ -64,15 +63,6 @@ namespace Infrastructure.Persistence
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            //TODO : Rename AspNet Identity Tables
-            //builder.Entity<AppUser>(entity => { entity.ToTable("AppUsers"); });
-            //builder.Entity<AppRole>(entity => { entity.ToTable("AppRoles"); });
-            //builder.Entity<AppUserRole>(entity => { entity.ToTable("AppUserRoles"); });
-            //builder.Entity<AppUserClaim>(entity => { entity.ToTable("AppUserClaims"); });
-            //builder.Entity<AppRoleClaim>(entity => { entity.ToTable("AppRoleClaims"); });
-            //builder.Entity<AppUserLogin>(entity => { entity.ToTable("AppUserLogins"); });
-            //builder.Entity<AppUserToken>(entity => { entity.ToTable("AppUserTokens"); });
         }
     }
 }
